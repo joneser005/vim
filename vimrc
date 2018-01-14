@@ -1,9 +1,9 @@
-filetype indent plugin on
+"filetype indent plugin on
 set encoding=utf-8
 set gdefault
 set hidden
 set hlsearch
-set incsearch 
+"set incsearch
 set laststatus=2
 set number
 "set relativenumber
@@ -18,3 +18,13 @@ set visualbell
 set wildmenu
 set wildmode=list:longest
 syntax on
+
+"This removes trailing whitespace, and leaves the cursor location intact:
+autocmd BufWritePre *  :call <SID>StripTrailingWhitespaces()
+
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
